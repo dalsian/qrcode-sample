@@ -1,0 +1,37 @@
+{
+  "name": "poc-ios",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "unzip -P seveneleven keys.zip -d keys/ 2> /dev/null || true",
+    "start": "node ./src/index.js",
+    "lint": "eslint ."
+  },
+  "engines": {
+    "node": ">=8.10.0 <9.0.0"
+  },
+  "dependencies": {
+    "@destinationstransfers/passkit": "^4.3.1",
+    "apn": "^2.2.0",
+    "bcryptjs": "^2.4.3",
+    "config": "^2.0.1",
+    "connect-redis": "^3.4.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "express": "~4.16.0",
+    "express-validation": "^1.0.2",
+    "express-winston": "^3.0.0",
+    "joi": "^13.7.0",
+    "jsog": "^1.0.7",
+    "lodash": "^4.17.11",
+    "moment": "^2.22.2",
+    "passbook": "^2.1.1",
+    "uuid": "^3.3.2",
+    "winston": "^3.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
+  }
+}
