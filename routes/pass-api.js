@@ -282,7 +282,6 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
   registrations.forEach((reg) => {
     const device = _.find(data.devices, dev => dev.deviceId === reg.deviceId);
     tokens.push(device.pushToken);
-    console.log(">>>>>>>>" + device.pushToken);
   });
   if (tokens.length) {
     // const note = new apn.Notification({"aps" : {
@@ -303,8 +302,8 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
     });
     console.log('Sending apn');
     apnProvider.send(note, tokens).then((result) => {
-      logger.debug('sent: ', result.sent.length);
-      logger.error('failed: ', result.failed.length);
+      console.log('sent: ', result.sent.length);
+      console.log('failed: ', result.failed.length);
       if (result.failed.length) res.status(500).json(result.failed);
       else res.status(200).end();
     });

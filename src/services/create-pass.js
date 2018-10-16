@@ -78,6 +78,8 @@ function handlePass(res, itemId, data) {
     textAlignment: 'PKTextAlignmentCenter'
   });
 
+  console.log("********* Pass detail *******  " + JSON.stringify(pass));
+
   // save to memore datastore
   data.passes.push({
     serialNumber,
