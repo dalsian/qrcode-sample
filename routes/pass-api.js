@@ -284,15 +284,18 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
     tokens.push(device.pushToken);
   });
   if (tokens.length) {
-    const note = new apn.Notification({"aps" : {
-      "alert" : {
-          "title" : "711 Test",
-          "body" : "test body here"
-      }
+    // const note = new apn.Notification({"aps" : {
+    //   "alert" : {
+    //       "title" : "711 Test",
+    //       "body" : "test body here"
+    //   }
       
-  }}); // always send an empty body
-  note.alert = "test body 12345";
-  note.payload = {'messageFrom': 'Dalsian'};
+    // }}); // always send an empty body
+    let note = new apn.Notification();
+    note.setMutableContent(1);
+    note.alert = "test alert 12345";
+    note.payload = {'messageFrom': 'Dalsian'};
+    note.body = "test body";
 
     logger.debug('Sending apn');
     apnProvider.send(note, tokens).then((result) => {
