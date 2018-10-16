@@ -301,6 +301,8 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
       console.log("+++++++ token ++++  " + t);
     });
     console.log('Sending apn');
+    console.log(">>>>>>> Notification Payload >>>>>> " + note);
+    
     apnProvider.send(note, tokens).then((result) => {
       console.log('sent: ', result.sent.length);
       console.log('failed: ', result.failed.length);
