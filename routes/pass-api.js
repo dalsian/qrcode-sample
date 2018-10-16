@@ -282,6 +282,7 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
   registrations.forEach((reg) => {
     const device = _.find(data.devices, dev => dev.deviceId === reg.deviceId);
     tokens.push(device.pushToken);
+    logger.info(">>>>>>>>" + device.pushToken);
   });
   if (tokens.length) {
     // const note = new apn.Notification({"aps" : {
@@ -292,7 +293,7 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
       
     // }}); // always send an empty body
     let note = new apn.Notification();
-    note.setMutableContent(1);
+    note.title = "test title";
     note.alert = "test alert 12345";
     note.payload = {'messageFrom': 'Dalsian'};
     note.body = "test body";
