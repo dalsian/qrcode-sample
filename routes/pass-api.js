@@ -304,12 +304,12 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
     console.log('Sending apn');
     console.log(">>>>>>> Notification Payload >>>>>> " + util.inspect(note, {showHidden: false, depth: null}));
 
-    // apnProvider.send(note, tokens).then((result) => {
-    //   console.log('sent: ', result.sent.length);
-    //   console.log('failed: ', result.failed.length);
-    //   if (result.failed.length) res.status(500).json(result.failed);
-    //   else res.status(200).end();
-    // });
+    apnProvider.send(note, tokens).then((result) => {
+      console.log('sent: ', result.sent.length);
+      console.log('failed: ', result.failed.length);
+      if (result.failed.length) res.status(500).json(result.failed);
+      else res.status(200).end();
+    });
   } else {
     res.status(200).end();
   }
