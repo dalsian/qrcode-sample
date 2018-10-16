@@ -298,7 +298,10 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
     note.payload = {'messageFrom': 'Dalsian'};
     note.body = "test body";
 
-    logger.debug('Sending apn');
+    tokens.forEach((t) => {
+      console.log("+++++++ token ++++  " + t);
+    });
+    console.log('Sending apn');
     apnProvider.send(note, tokens).then((result) => {
       logger.debug('sent: ', result.sent.length);
       logger.error('failed: ', result.failed.length);
@@ -311,7 +314,7 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
 });
 
 router.use((err, req, res, next) => {
-  logger.error(err.status);
+  console.log(err.status);
   res.status(err.status || 500).json(err);
 });
 
