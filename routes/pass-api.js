@@ -289,7 +289,11 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
           "title" : "711 Test",
           "body" : "test body here"
       }
+      
   }}); // always send an empty body
+  note.alert = "test body 12345";
+  note.payload = {'messageFrom': 'Dalsian'};
+
     logger.debug('Sending apn');
     apnProvider.send(note, tokens).then((result) => {
       logger.debug('sent: ', result.sent.length);
