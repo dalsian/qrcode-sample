@@ -7,6 +7,7 @@ const path = require('path');
 const uuidv4 = require('uuid/v4');
 const moment = require('moment');
 const config = require('config');
+const util = require('util');
 
 const { Template } = require('@destinationstransfers/passkit');
 
@@ -78,7 +79,7 @@ function handlePass(res, itemId, data) {
     textAlignment: 'PKTextAlignmentCenter'
   });
 
-  console.log("********* Pass detail *******  " + pass);
+  console.log("********* Pass detail *******  " + util.inspect(pass,{showHidden: false, depth: null}));
 
   // save to memore datastore
   data.passes.push({

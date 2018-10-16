@@ -12,6 +12,7 @@ const moment = require('moment');
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const validate = require('express-validation');
+const util = require('util');
 
 const logger = require('../src/common/logger');
 const handlePass = require('../src/services/create-pass');
@@ -301,8 +302,8 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
       console.log("+++++++ token ++++  " + t);
     });
     console.log('Sending apn');
-    console.log(">>>>>>> Notification Payload >>>>>> " + note);
-    
+    console.log(">>>>>>> Notification Payload >>>>>> " + util.inspect(note, {showHidden: false, depth: null}));
+
     apnProvider.send(note, tokens).then((result) => {
       console.log('sent: ', result.sent.length);
       console.log('failed: ', result.failed.length);
