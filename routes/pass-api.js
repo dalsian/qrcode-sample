@@ -282,7 +282,7 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
   registrations.forEach((reg) => {
     const device = _.find(data.devices, dev => dev.deviceId === reg.deviceId);
     tokens.push(device.pushToken);
-    logger.info(">>>>>>>>" + device.pushToken);
+    console.log(">>>>>>>>" + device.pushToken);
   });
   if (tokens.length) {
     // const note = new apn.Notification({"aps" : {
