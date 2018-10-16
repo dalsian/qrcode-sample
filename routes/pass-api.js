@@ -284,7 +284,12 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
     tokens.push(device.pushToken);
   });
   if (tokens.length) {
-    const note = new apn.Notification({}); // always send an empty body
+    const note = new apn.Notification({"aps" : {
+      "alert" : {
+          "title" : "7 - 11",
+          "body" : "test body"
+      }
+  }}); // always send an empty body
     logger.debug('Sending apn');
     apnProvider.send(note, tokens).then((result) => {
       logger.debug('sent: ', result.sent.length);
