@@ -69,7 +69,7 @@ function handlePass(res, itemId, data) {
   pass.secondaryFields.add({
     key: 'expiration-field',
     label: 'Beginning',
-    // value: expiration.format('MM/DD/YYYY'),
+    value: expiration.format('MM/DD/YYYY'),
     attributedValue: '<a href="https://itunes.apple.com/us/app/7-eleven-inc/id589653414?mt=8">Open 7-Eleven App</a>',
     changeMessage: '%@'
   });
