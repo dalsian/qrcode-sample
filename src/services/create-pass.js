@@ -70,7 +70,7 @@ function handlePass(res, itemId, data) {
     key: 'expiration-field',
     label: 'Expires',
     value: expiration.format('MM/DD/YYYY'),
-    changeMessage: '%#@'
+    changeMessage: '%@'
   });
   pass.auxiliaryFields.add({
     key: 'aux-field',
