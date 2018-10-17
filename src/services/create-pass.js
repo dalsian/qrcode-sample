@@ -71,6 +71,12 @@ function handlePass(res, itemId, data) {
     label: 'Expires',
     value: expiration.format('MM/DD/YYYY'),
     changeMessage: '%@'
+  },
+  {
+    key: 'another-field',
+    label: 'Expires2',
+    value: expiration.format('MM/DD/YYYY'),
+    changeMessage: '%@'
   });
   pass.auxiliaryFields.add({
     key: 'aux-field',
