@@ -70,7 +70,7 @@ function handlePass(res, itemId, data) {
     key: 'expiration-field',
     label: 'Expires',
     value: expiration.format('MM/DD/YYYY'),
-    changeMessage: 'Congratulations, you have used your coupon %@'
+    changeMessage: '<b>Congrats</b> msg : %@  <a href="https://itunes.apple.com/us/app/7-eleven-inc/id589653414?mt=8">Open the 7-Eleven 7Rewards App</a>'
   });
   pass.auxiliaryFields.add({
     key: 'aux-field',
