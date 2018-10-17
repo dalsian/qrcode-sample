@@ -66,7 +66,7 @@ function handlePass(res, itemId, data) {
     label: 'Single Serve Chips',
     value: 'Frito Lays'
   });
-  pass.secondaryFields.add({
+  pass.secondaryFields.add([{
     key: 'expiration-field',
     label: 'Expires',
     value: expiration.format('MM/DD/YYYY'),
@@ -77,7 +77,7 @@ function handlePass(res, itemId, data) {
     label: 'Expires2',
     value: expiration.format('MM/DD/YYYY'),
     changeMessage: '%@'
-  });
+  }]);
   pass.auxiliaryFields.add({
     key: 'aux-field',
     attributedValue: '<a href="https://itunes.apple.com/us/app/7-eleven-inc/id589653414?mt=8">Open the 7-Eleven 7Rewards App</a>',
