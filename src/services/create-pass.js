@@ -70,7 +70,7 @@ function handlePass(res, itemId, data) {
     key: 'expiration-field',
     label: 'Expires',
     value: expiration.format('MM/DD/YYYY'),
-    changeMessage: 'Congratulations, you have used your coupon'
+    changeMessage: 'Congratulations, you have used your coupon %@'
   });
   pass.auxiliaryFields.add({
     key: 'aux-field',
