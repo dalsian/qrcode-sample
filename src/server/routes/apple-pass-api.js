@@ -14,6 +14,7 @@ const logger = require('../common/logger');
 const validateToken = require('../common/validateToken');
 const validationPattern = require('../common/validationPattern');
 const handlePass = require('../services/apple-pass-creator');
+const reward_service = require('../services/reward-service');
 
 const router = express.Router();
 
@@ -41,6 +42,9 @@ router.get(`/passes/${passTypeIdentifier}/:serialNumber`, validateToken, (req, r
         return;
       }
     }
+
+    //TODO update pass with correct reward points.
+
 
     /* send the pass back to user */
     res.status(200);
@@ -125,6 +129,29 @@ router.post(`/devices/:deviceId/registrations/${passTypeIdentifier}/:serialNumbe
     logger.debug('****************************************************');
     logger.debug(data);
     logger.debug('****************************************************');
+
+    /**
+     * Register new user to reward service if the device is new.
+     */
+    if (!device) {
+      reward_service.register(req.params.serialNumber)
+                    .then((msg) => {
+                        res.status(200).json(msg);
+                    })
+                    .catch((err) => {
+                        res.status(500).json(err);
+                    });
+    }
+
+    /**
+     * TODO Call 7-rewards-consumer.  
+     * Give initial reward points here.
+     */
+
+    /**
+     * TODO Update barcode?
+     */
+    
 
     res.status(201).end();
   }
