@@ -15,6 +15,7 @@ const validateToken = require('../common/validateToken');
 const validationPattern = require('../common/validationPattern');
 const handlePass = require('../services/apple-pass-creator');
 const reward_service = require('../services/reward-service');
+const apple_notification = require('../services/apple-notification');
 
 const router = express.Router();
 
@@ -43,7 +44,27 @@ router.get(`/passes/${passTypeIdentifier}/:serialNumber`, validateToken, (req, r
       }
     }
 
-    //TODO update pass with correct reward points.
+    /**
+     * (1) Get rewards points from 7-11.
+     * (2) Update the pass.
+     */
+    reward_service.getTotalRewardPoints(req.params.serialNumber)
+                .then((points) => {
+                  apple_notification.updatePass(req.params.serialNumber, 
+                        {
+                          "update": [
+                            {
+                              "field": "secondaryFields",
+                              "key": "expiration-field",
+                              "value": points.reward_points
+                            }
+                          ]
+                        });
+
+                }).catch((err) => {
+                    next(err);
+                });
+
 
 
     /* send the pass back to user */
