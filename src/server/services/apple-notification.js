@@ -25,9 +25,9 @@ const options = {
 const apnProvider = new apn.Provider(options);
 
 const updatePass = (_serialNumber, _body) => {
-    logger.debug('Update');
-    logger.debug(req.params);
-    logger.debug(_body);
+    console.log('Update');
+    console.log(req.params);
+    console.log(_body);
   
     const foundPass = _.find(data.passes, p => p.serialNumber === _serialNumber);
     if (!foundPass) {

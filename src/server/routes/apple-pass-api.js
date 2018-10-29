@@ -50,6 +50,7 @@ router.get(`/passes/${passTypeIdentifier}/:serialNumber`, validateToken, (req, r
      */
     reward_service.getTotalRewardPoints(req.params.serialNumber)
                 .then((points) => {
+                  console.log(">>>>>>>" + points.reward_points);
                   apple_notification.updatePass(req.params.serialNumber, 
                         {
                           "update": [
@@ -62,6 +63,7 @@ router.get(`/passes/${passTypeIdentifier}/:serialNumber`, validateToken, (req, r
                         });
 
                 }).catch((err) => {
+                    console.log(`>>>>>>>>>>>>>error ${err}`);
                     next(err);
                 });
 
