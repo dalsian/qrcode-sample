@@ -6,6 +6,7 @@ const path = require('path');
 const config = require('config');
 const apn = require('apn');
 const moment = require('moment');
+const util = require('util');
 
 const data = require('../common/mock-data');
 const logger = require('../common/logger');
@@ -54,12 +55,14 @@ const updatePass = (_serialNumber, _body) => {
     });
     if (tokens.length) {
         const note = new apn.Notification({}); // always send an empty body
-        note.payload = {'messageFrom': 'Hey User!!!'};
-        logger.debug('Sending apn');
+        // note.payload = {'messageFrom': 'Hey User!!!'};
+        console.log('Sending apn');
         apnProvider.send(note, tokens).then((result) => {
-            logger.debug('sent: ', result.sent.length);
-            logger.error('failed: ', result.failed.length);
+            console.log(`>>>> APN result >>> ${util.inspect(result)}`);
+            // logger.debug('sent: ', result.sent.length);
+            // logger.error('failed: ', result.failed.length);
             if (result.failed.length) {
+                console.log("!!!!! Failed");
                 return {status:500, msg: result.failed};
             } else {
                 return {status: 200, msg: "OK1"};
