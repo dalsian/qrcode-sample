@@ -10,8 +10,8 @@ const apn = require('apn');
 const validate = require('express-validation');
 
 const data = require('../common/mock-data');
-const validateToken = require('../common/validateToken');
-const validationPattern = require('../common/validationPattern');
+// const validateToken = require('../common/validateToken');
+// const validationPattern = require('../common/validationPattern');
 const logger = require('../common/logger');
 const apple_notification = require('../services/apple-notification');
 
