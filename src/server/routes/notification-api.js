@@ -17,6 +17,25 @@ const apple_notification = require('../services/apple-notification');
 
 const router = express.Router();
 
+/* Validation of fields */
+const STRUCTURE_FIELDS = [
+  'auxiliaryFields',
+  'backFields',
+  'headerFields',
+  'primaryFields',
+  'secondaryFields'
+];
+const updateObject = Joi.object().keys({
+  field: Joi.string().required(),
+  key: Joi.string().when('field', { is: Joi.any().valid(STRUCTURE_FIELDS), then: Joi.required() }),
+  value: Joi.any().required()
+});
+const updateValidation = {
+  body: {
+    update: Joi.array().items(updateObject).required()
+  }
+};
+
 /* create APN provider for push notifications */
 const options = {
   cert: path.join(appRoot, config.KEYS_PATH, config.CERT_FILE),
