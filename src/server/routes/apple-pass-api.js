@@ -14,6 +14,7 @@ const logger = require('../common/logger');
 const validateToken = require('../common/validateToken');
 const validationPattern = require('../common/validationPattern');
 const handlePass = require('../services/apple-pass-creator');
+const reward_service = require('../services/reward-service');
 
 const router = express.Router();
 
@@ -121,6 +122,14 @@ router.post(`/devices/:deviceId/registrations/${passTypeIdentifier}/:serialNumbe
       deviceId: req.params.deviceId,
       serialNumber: req.params.serialNumber
     });
+
+    reward_service.register(req.params.deviceId)
+                  .then((result) => {
+                    console.log(result);
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
 
     console.log('****************************************************');
     console.log(data);
