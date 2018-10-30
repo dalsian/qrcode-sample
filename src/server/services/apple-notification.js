@@ -3,16 +3,11 @@
  */
 const _ = require('lodash');
 const path = require('path');
-// const express = require('express');
-// const Joi = require('joi');
 const config = require('config');
 const apn = require('apn');
 const moment = require('moment');
-// const validate = require('express-validation');
 
 const data = require('../common/mock-data');
-// const validateToken = require('../common/validateToken');
-// const validationPattern = require('../common/validationPattern');
 const logger = require('../common/logger');
 
 /* create APN provider for push notifications */
