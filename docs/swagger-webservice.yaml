@@ -1,0 +1,327 @@
+swagger: '2.0'
+info:
+  title: Passkit Web Service
+  version: 1.0.0
+host: tc-wallet-demo.herokuapp.com
+basePath: /
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  '/{version}/devices/{deviceLibraryIdentifier}/registrations/{passTypeIdentifier}/{serialNumber}':
+    post:
+      tags:
+        - passkit
+      description: Registering a Device to Receive Push Notifications for a Pass
+      produces:
+        - application/json
+      parameters:
+        - name: version
+          in: path
+          description: 'The protocol version - currently, v1'
+          required: true
+          type: string
+          default: v1
+        - name: deviceLibraryIdentifier
+          in: path
+          description: A unique identifier that is used to identify and authenticate this device in future request
+          required: true
+          type: string
+        - name: passTypeIdentifier
+          in: path
+          description: 'The pass''s type, as specified in the pass'
+          required: true
+          type: string
+        - name: serialNumber
+          in: path
+          description: 'The pass''s serial number, as specified in the pass'
+          required: true
+          type: string
+        - name: pushToken
+          in: body
+          description: JSON dictionary containing the push token
+          required: true
+          schema:
+            $ref: '#/definitions/pushToken'
+      responses:
+        '200':
+          description: 'If the serial number is already registered for this device, returns HTTP status 200'
+        '201':
+          description: 'If registration succeeds, returns HTTP status 201'
+        '401':
+          description: 'If the request is not authorized, returns HTTP status 401'
+        default:
+          description: 'Otherwise, returns the appropriate standard HTTP status'
+      security:
+        - ApplePass: []
+    delete:
+      tags:
+        - passkit
+      description: Unregistering a Device
+      produces:
+        - application/json
+      parameters:
+        - name: version
+          in: path
+          description: 'The protocol version - currently, v1'
+          required: true
+          type: string
+          default: v1
+        - name: deviceLibraryIdentifier
+          in: path
+          description: A unique identifier that is used to identify and authenticate this device in future request
+          required: true
+          type: string
+        - name: passTypeIdentifier
+          in: path
+          description: 'The pass''s type, as specified in the pass'
+          required: true
+          type: string
+        - name: serialNumber
+          in: path
+          description: 'The pass''s serial number, as specified in the pass'
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'If disassociation succeeds, returns HTTP status 200'
+        '401':
+          description: 'If the request is not authorized, returns HTTP status 401'
+        default:
+          description: 'Otherwise, returns the appropriate standard HTTP status'
+      security:
+        - ApplePass: []
+  '/{version}/devices/{deviceLibraryIdentifier}/registrations/{passTypeIdentifier}':
+    get:
+      tags:
+        - passkit
+      description: Getting the Serial Numbers for Passes Associated with a Device
+      produces:
+        - application/json
+      parameters:
+        - name: version
+          in: path
+          description: 'The protocol version - currently, v1'
+          required: true
+          type: string
+          default: v1
+        - name: deviceLibraryIdentifier
+          in: path
+          description: A unique identifier that is used to identify and authenticate this device in future request
+          required: true
+          type: string
+        - name: passTypeIdentifier
+          in: path
+          description: 'The pass''s type, as specified in the pass'
+          required: true
+          type: string
+        - name: passesUpdatedSince
+          in: query
+          description: 'A tag from a previous request. (optional). If the passesUpdatedSince parameter is present, returns only the passes that have been updated since the time indicated by tag. Otherwise, returns all passes.'
+          required: false
+          type: string
+      responses:
+        '200':
+          description: 'If there are matching passes, returns HTTP status 200 with a JSON dictionary with the lastUpdated tag and an array containing the serial numbers.'
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/devicePasses'
+        '204':
+          description: 'If there are no matching passes, returns HTTP status 204'
+        default:
+          description: 'Otherwise, returns the appropriate standard HTTP status'
+  '/{version}/passes/{passTypeIdentifier}/{serialNumber}':
+    get:
+      tags:
+        - passkit
+      description: Getting the Latest Version of a Pass
+      produces:
+        - application/json
+        - application/vnd.apple.pkpass
+      parameters:
+        - name: version
+          in: path
+          description: 'The protocol version - currently, v1'
+          required: true
+          type: string
+          default: v1
+        - name: passTypeIdentifier
+          in: path
+          description: 'The pass''s type, as specified in the pass'
+          required: true
+          type: string
+        - name: serialNumber
+          in: path
+          description: 'The pass''s serial number, as specified in the pass'
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'If request is authorized, returns HTTP status 200 with a payload of the pass data'
+          schema:
+            type: file
+        '401':
+          description: 'If the request is not authorized, returns HTTP status 401'
+        default:
+          description: 'Otherwise, returns the appropriate standard HTTP status'
+      security:
+        - ApplePass: []
+  '/{version}/log':
+    post:
+      tags:
+        - passkit
+      description: This endpoint is intended to help you debug your web service implementation. Log messages contain a description of the error in a human-readable format.
+      produces:
+        - application/json
+      parameters:
+        - name: version
+          in: path
+          description: 'The protocol version - currently, v1'
+          required: true
+          type: string
+          default: v1
+        - name: logs
+          in: body
+          description: JSON dictionary containing the logs
+          required: true
+          schema:
+            $ref: '#/definitions/logs'
+      responses:
+        '200':
+          description: Logging successfull
+        default:
+          description: 'Otherwise, returns the appropriate standard HTTP status'
+  '/{version}/pass':
+    get:
+      tags:
+        - passkit
+      description: Get 
+      produces:
+        - application/json
+        - application/vnd.apple.pkpass
+      parameters:
+        - name: version
+          in: path
+          description: 'The protocol version - currently, v1'
+          required: true
+          type: string
+          default: v1
+        - name: id
+          in: query
+          description: 'The pass client identifier'
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'If request is authorized, returns HTTP status 200 with a payload of the pass data'
+          schema:
+            type: file
+        '401':
+          description: 'If the request is not authorized, returns HTTP status 401'
+        default:
+          description: 'Otherwise, returns the appropriate standard HTTP status'
+  '/{version}/update/{serialNumber}':
+    post:
+      tags:
+        - passkit
+      description: Update pass and the Push Notifcation
+        - application/json
+      parameters:
+        - name: version
+          in: path
+          description: 'The protocol version - currently, v1'
+          required: true
+          type: string
+          default: v1
+        - name: serialNumber
+          in: path
+          description: 'The pass''s serial number, as specified in the pass'
+          required: true
+          type: string
+        - name: update
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/update'
+      responses:
+        '200':
+          description: 'If the serial number is already registered for this device, returns HTTP status 200'
+        '201':
+          description: 'If registration succeeds, returns HTTP status 201'
+        '401':
+          description: 'If the request is not authorized, returns HTTP status 401'
+        default:
+          description: 'Otherwise, returns the appropriate standard HTTP status'
+      security:
+        - ApplePass: []
+definitions:
+  updateProperty:
+    description: The field to be update
+    required: 
+      - field
+      - value
+    properties:
+      field:
+        type: string
+      key:
+        description: Only present when field is "primaryFields", "secondaryFields" or "auxiliaryFields"
+        type: string
+      value:
+        type: string
+  update:
+    description: The object used to update pass information
+    properties:
+      update:
+        type: array
+        items:
+          $ref: '#/definitions/updateProperty'
+  pushToken:
+    required:
+      - pushToken
+    properties:
+      pushToken:
+        description: The push token that the server can use to send push notifications to this device
+        type: string
+  serialNumber:
+    description: Serial number of a matching pass
+    type: string
+  devicePasses:
+    required:
+      - lastUpdated
+      - serialNumbers
+    properties:
+      lastUpdated:
+        description: The current modification tag.
+        type: string
+      serialNumbers:
+        description: The serial numbers of the matching passes
+        type: array
+        items:
+          $ref: '#/definitions/serialNumber'
+    type: object
+  log:
+    description: Logs entry
+    type: string
+  logs:
+    required:
+      - logs
+    properties:
+      logs:
+        description: log errors
+        type: array
+        items:
+          $ref: '#/definitions/log'
+    type: object
+securityDefinitions:
+  ApplePass:
+    type: apiKey
+    description: 'Authorization header is supplied; its value is the word ApplePass, followed by a space, followed by the pass''s authorization token as specified in the pass'
+    name: Authorization
+    in: header
+tags:
+  - name: passkit
+    description: Passkit Web Service

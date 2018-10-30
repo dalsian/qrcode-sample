@@ -59,7 +59,7 @@ module.exports = {
   /**
    * External URL of the server (were this code is going to be deployed).
    */
-  WEB_SERVICE_URL: process.env.WEB_SERVICE_URL || 'https://qrcode-demo.herokuapp.com',
+  WEB_SERVICE_URL: process.env.WEB_SERVICE_URL || 'https://qrcode-demo-test.herokuapp.com',
 
   /**
    * Authentication token to verify the authenticity of the Pass.
@@ -71,18 +71,4 @@ module.exports = {
    */
   APPID: 589653414,
 
-  /**
-   * API Versioning
-   */
-  API_VERSION: '/v1',
-
-  /**
-   * API PORT
-   */
-  API_PORT: process.env.API_PORT || 3030,
-
-  /**
-   * CLIENT PORT
-   */
-  CLIENT_PORT: process.env.CLIENT_PORT || 3000
 };

@@ -71,18 +71,4 @@ module.exports = {
    */
   APPID: 589653414,
 
-  /**
-   * API Versioning
-   */
-  API_VERSION: '/v1',
-
-  /**
-   * API PORT
-   */
-  API_PORT: process.env.API_PORT || 3030,
-
-  /**
-   * CLIENT PORT
-   */
-  CLIENT_PORT: process.env.CLIENT_PORT || 3000
 };

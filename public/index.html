@@ -2,41 +2,71 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
-    -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="shortcut icon" href="favicon.ico">
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>7Eleven QRCode</title>
-    <script src="https://js.stripe.com/v3/"></script>
-    <script type="text/javascript" src="https://netverify.com/widget/jumio-verify/2.0/iframe-script.js"></script>
+    <title>7Rewards - Redeem</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/main.css" rel="stylesheet">
+
+    <script >
+      window.onload = function() {
+        var hash = window.location.hash;
+        document.getElementById("wallet-href").setAttribute("href", "/v1/pass?id=" + hash.substring(1));
+      }
+    </script>
+
   </head>
+
   <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <nav class="navbar navbar-fixed-top">
+      <div class="container">
+          <a href="#"><img class="logo" src="imgs/logo.png"></a>
+          <div class="icons-cont">
+            <a><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
+            <a><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a>
+            <a><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
+          </div>
+      </div>
+    </nav>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+    <div class="container welcome-area">
+      <div class="welcome">
+        <h1>Welcome</h1>
+        <p>Thanks for signing up</p>
+        <p>Member ID: <strong>234123412341</strong></p>
+      </div>
+    </div>
+
+    <div class="points">
+      <h2>You have earned 800 reward points<h2>
+    </div>
+
+    <div class="barcode-area">
+      <p>Scar this barcode to earn points</p>
+      <div class="barcode">
+        <img src="imgs/barcode.jpg">
+      </div>
+    </div>
+
+    <div class="wallet-button">
+      <a href="#" id="wallet-href"><img src="imgs/add-to-wallet-button.png"></a>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <p><a>Need help?</a> If you are having trouble, please <a>click here</a> and we'd be happy to help.</p>
+      </div>
+    </footer>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
