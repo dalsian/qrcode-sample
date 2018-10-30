@@ -57,17 +57,18 @@ const updatePass = async (_serialNumber, _body) => {
         const note = new apn.Notification({}); // always send an empty body
         // note.payload = {'messageFrom': 'Hey User!!!'};
         console.log('Sending apn');
-        apnProvider.send(note, tokens).then((result) => {
-            console.log(`>>>> APN result >>> ${util.inspect(result)}`);
-            // logger.debug('sent: ', result.sent.length);
-            // logger.error('failed: ', result.failed.length);
-            if (result.failed.length) {
-                console.log("!!!!! Failed");
-                return {status:500, msg: result.failed};
-            } else {
-                return {status: 200, msg: "OK1"};
-            }
-        });
+        return await apnProvider.send(note, tokens);
+        // .then((result) => {
+        //     console.log(`>>>> APN result >>> ${util.inspect(result)}`);
+        //     // logger.debug('sent: ', result.sent.length);
+        //     // logger.error('failed: ', result.failed.length);
+        //     if (result.failed.length) {
+        //         console.log("!!!!! Failed");
+        //         return {status:500, msg: result.failed};
+        //     } else {
+        //         return {status: 200, msg: "OK1"};
+        //     }
+        // });
     } else {
         return {status: 200, msg: "OK2"};
     }

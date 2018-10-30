@@ -41,7 +41,7 @@ const getClientToken = async () => {
                 token_expire: (moment().add(token.expires_in, 's')),
                 scope: token.scope,
                 token_type: token.token_type
-            };            
+            };
     } 
 
     return reward_client_token;
