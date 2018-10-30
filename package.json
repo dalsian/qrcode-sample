@@ -5,7 +5,7 @@
   "main": "src/server/index.js",
   "scripts": {
     "postinstall": "unzip -P seveneleven src/server/keys.zip -d src/server/keys/ 2> /dev/null || true",
-    "build": "webpack --mode production",
+    "heroku-postbuild": "webpack --mode production",
     "start": "npm run build && node src/server/index.js",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "nodemon -L src/server/index.js",
