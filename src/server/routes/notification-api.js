@@ -19,7 +19,7 @@ const router = express.Router();
  */
 router.post('/update/:serialNumber', validateToken, validate(validationPattern.appleNotificationValidation), (req, res) => {
   const result = apple_notification.updatePass(req.params.serialNumber, req.body);
-  res.status(result.status).json({msg: result.msg}).end();
+  res.status(result.status).json({msg: result.msg});
 });
 
 module.exports = router;
