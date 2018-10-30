@@ -165,9 +165,4 @@ router.get('/pass', validate(validationPattern.appleGetPassValidation), (req, re
   }
 });
 
-router.use((err, req, res, next) => {
-  console.log(err.status);
-  res.status(err.status || 500).json(err);
-});
-
 module.exports = router;

@@ -22,10 +22,4 @@ router.post('/update/:serialNumber', validateToken, validate(validationPattern.a
   res.status(result.status).json({msg: result.msg}).end();
 });
 
-router.use((err, req, res, next) => {
-  logger.error(err.status);
-  console.log("!!!" + err.status);
-  res.status(err.status || 500).json(err);
-});
-
 module.exports = router;
