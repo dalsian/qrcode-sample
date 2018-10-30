@@ -28,8 +28,8 @@ const passTypeIdentifier = config.PASS_TYPE_IDENTIFIER;
  * Getting the Latest Version of a Pass
  */
 router.get(`/passes/${passTypeIdentifier}/:serialNumber`, validateToken, (req, res, next) => {
-  logger.debug('Get Passes');
-  logger.debug(req.params);
+  console.log('Get Passes');
+  console.log(req.params);
 
   const foundPass = _.find(data.passes, p => p.serialNumber === req.params.serialNumber);
   if (foundPass) {
@@ -55,9 +55,9 @@ router.get(`/passes/${passTypeIdentifier}/:serialNumber`, validateToken, (req, r
  * Getting the Serial Numbers for Passes Associated with a Device.
  */
 router.get(`/devices/:deviceId/registrations/${passTypeIdentifier}`, (req, res) => {
-  logger.debug('Get Devices');
-  logger.debug(req.params);
-  logger.debug(req.query);
+  console.log('Get Devices');
+  console.log(req.params);
+  console.log(req.query);
 
   const passesUpdatedSince = parseInt(req.params.passesUpdatedSince || '0', 10);
 
@@ -82,9 +82,9 @@ router.get(`/devices/:deviceId/registrations/${passTypeIdentifier}`, (req, res) 
     serialNumbers: []
   };
 
-  logger.debug('****************************************************');
-  logger.debug(response);
-  logger.debug('****************************************************');
+  console.log('****************************************************');
+  console.log(response);
+  console.log('****************************************************');
 
   res.status(200).json(response);
 });
@@ -93,9 +93,9 @@ router.get(`/devices/:deviceId/registrations/${passTypeIdentifier}`, (req, res) 
  * Registering a Device to Receive Push Notifications for a Pass.
  */
 router.post(`/devices/:deviceId/registrations/${passTypeIdentifier}/:serialNumber`, validateToken, validate(validationPattern.appleRegisterValidation), (req, res) => {
-  logger.debug('Register');
-  logger.debug(req.body);
-  logger.debug(req.params);
+  console.log('Register');
+  console.log(req.body);
+  console.log(req.params);
 
   /* find a pass for given serial number. fail if none is found */
   const pass = _.find(data.passes, p => p.serialNumber === req.params.serialNumber);
@@ -122,9 +122,9 @@ router.post(`/devices/:deviceId/registrations/${passTypeIdentifier}/:serialNumbe
       serialNumber: req.params.serialNumber
     });
 
-    logger.debug('****************************************************');
-    logger.debug(data);
-    logger.debug('****************************************************');
+    console.log('****************************************************');
+    console.log(data);
+    console.log('****************************************************');
 
     res.status(201).end();
   }
@@ -134,7 +134,7 @@ router.post(`/devices/:deviceId/registrations/${passTypeIdentifier}/:serialNumbe
  * Unregistering a Device.
  */
 router.delete(`/devices/:deviceId/registrations/${passTypeIdentifier}/:serialNumber`, validateToken, (req, res) => {
-  logger.debug(`Delete: ${JSON.stringify(req.params)}`);
+  console.log(`Delete: ${JSON.stringify(req.params)}`);
 
   /* remove device registration */
   _.remove(data.registrations, reg => reg.deviceId === req.params.deviceId
@@ -147,9 +147,9 @@ router.delete(`/devices/:deviceId/registrations/${passTypeIdentifier}/:serialNum
     _.remove(data.devices, dev => dev.deviceId === req.params.deviceId);
   }
 
-  logger.debug('**************AFTER*DELETE**************************');
-  logger.debug(data);
-  logger.debug('****************************************************');
+  console.log('**************AFTER*DELETE**************************');
+  console.log(data);
+  console.log('****************************************************');
 
   res.status(200).end();
 });
@@ -163,6 +163,11 @@ router.get('/pass', validate(validationPattern.appleGetPassValidation), (req, re
   } else {
     handlePass(res, req.query.id, data).catch(err => next(err));
   }
+});
+
+router.use((err, req, res, next) => {
+  console.log(err.status);
+  res.status(err.status || 500).json(err);
 });
 
 module.exports = router;
