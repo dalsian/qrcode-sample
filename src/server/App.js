@@ -53,12 +53,15 @@ app.use(config.API_VERSION, qrGenApi);
 app.use(config.API_VERSION, rewardsApi);
 app.use(config.API_VERSION, testApi);
 
+// Handles any requests that don't match the ones above
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'../../../dist/index.html'));
+});
+
 /* default error handler */
 app.use((err, req, res, next) => {
   logger.error(err);
   res.status(err.status || 500).json(err);
 });
-
-console.log('Andy', config.API_VERSION, config.API_PORT)
 
 module.exports = app;

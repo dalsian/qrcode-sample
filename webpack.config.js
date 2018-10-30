@@ -32,10 +32,10 @@ module.exports = {
     ]
   },
   devServer: {
-    port: process.env.PORT,
+    port: config.CLIENT_PORT,
     open: true,
     proxy: {
-      '/api': `https://qrcode-demo-test.herokuapp.com:${process.env.PORT}`
+      '/api': 'http://localhost:' + config.API_PORT
     }
   },
   plugins: [
