@@ -48,7 +48,7 @@ export default class App extends Component {
         </div>
 
         <div class="wallet-button">
-          <a href="#" id="wallet-href"><img src={AddToWalletBtn}/></a>
+          <a href="https://qrcode-demo-test.herokuapp.com/v1/pass?id=c653357d-d30a-42b7-856e-abd625fc1af2" id="wallet-href"><img src={AddToWalletBtn}/></a>
         </div>
         <div class="footer">
           <div class="container">
