@@ -136,10 +136,10 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
   }
 });
 
-router.use((err, req, res, next) => {
-  logger.error(err.status);
-  console.log("!!!" + err.status);
-  res.status(err.status || 500).json(err);
-});
+// router.use((err, req, res, next) => {
+//   logger.error(err.status);
+//   console.log("!!!" + err.status);
+//   res.status(err.status || 500).json(err);
+// });
 
 module.exports = router;
