@@ -8,6 +8,7 @@ branches:
   - gh-pages
   - "/.*/"
 deploy:
+  app: qrcode-demo-test
   provider: heroku
   api_key:
     secure: l6lFLK9ZzLE8mTH3ys+Ut9NVhP1PRDTDWzWUhh0pNtodjyJvbO8QtDn4oCdFudC87ewELYJy2MiXnh1UPYfU9qRybnKprv8jPDQ9JSb0O8d2XVOrJ6IHHWVgViBGzKlck7MSdvE4FphVsnz1HIp+6OEjf+qWuj2bgQOuCz0EcbxCHXGVAkxrVX1eu/XxmWO0LTgLIA39BGM/A241A6SH+i+8n4G+xAol7cOmh21C2q8f7h1NyDewvYOLmaoKTbLO2ePs35r/ywM9drJpfirJu3ed6qbJDAEyb1sjg/a6KhmgUn3lh1mL1gVG8XHNXKtMbz6TC+Er0nh6AXOS93ddCG2X64uhrsCGYfs7FaC4mULEelftckGS9ZN6iHCsp5dYTGARtBvPDPkLbgoqtvitIf9wtAXSO0it7tHKyccX5XWaG1ZehcTufuB4Tt5Bg5LVN7WjVRVg9Qf9Nt19TsvusgRzgVJHD+TcqGEXKGsK5lBEIGc1XeRbCMgeCWMDp1uIAEAR/Nxdmpr0+1ZojY+zniNxtrFvwimVwT2SM/iNFb6nkg3ahze8k4LF9TQL6IkoKF2sncgQy5Gx9jQT4xmAeU/+/2woYljbDzZ4hHNHKmLx/OA44Uu/iV66jYvM+2VUUOJCVjQcbKJ3832ZiM6uZt8sK9p3iYcWQhQHYacBNK4=
