@@ -20,7 +20,6 @@ const options = {
   };
 const apnProvider = new apn.Provider(options);
 
-
 const updatePass = async (_serialNumber, _body) => {
     logger.debug('>>>>>>Update');
     logger.debug(_serialNumber);
@@ -58,7 +57,7 @@ const updatePass = async (_serialNumber, _body) => {
         console.log('Sending apn');
         return apnProvider.send(note, tokens);
     } else {
-        return {status: 200, msg: "OK2"};
+        return {status: 200, msg: "OK"};
     }
 };
 
