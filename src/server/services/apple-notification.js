@@ -67,11 +67,11 @@ const updatePass = (_serialNumber, _body) => {
             if (result.failed.length) {
                 return {status:500, msg: result.failed};
             } else {
-                return {status: 200, msg: "OK"};
+                return {status: 200, msg: "OK1"};
             }
         });
     } else {
-        return {status: 200, msg: "OK"};
+        return {status: 200, msg: "OK2"};
     }
 };
 
