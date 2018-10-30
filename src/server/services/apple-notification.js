@@ -21,7 +21,7 @@ const options = {
 const apnProvider = new apn.Provider(options);
 
 
-const updatePass = (_serialNumber, _body) => {
+const updatePass = async (_serialNumber, _body) => {
     logger.debug('>>>>>>Update');
     logger.debug(_serialNumber);
     logger.debug(_body);

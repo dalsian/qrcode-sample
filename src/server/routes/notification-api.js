@@ -18,8 +18,13 @@ const router = express.Router();
  * Update pass fields and send Push Notification
  */
 router.post('/update/:serialNumber', validateToken, validate(validationPattern.appleNotificationValidation), (req, res) => {
-  const result = apple_notification.updatePass(req.params.serialNumber, req.body);
-  res.status(result.status).json({msg: result.msg});
+  const update = apple_notification.updatePass(req.params.serialNumber, req.body);
+  update.then((result) => {
+    console.log("Result>>>"+result);
+    res.status(result.status).json({msg: result.msg});
+  }).catch((err) => {
+    res.status(500).json({errMsg: err});
+  });
 });
 
 module.exports = router;
