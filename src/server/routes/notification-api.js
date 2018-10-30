@@ -112,7 +112,9 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
     reg => reg.serialNumber === req.params.serialNumber);
   const tokens = [];
   registrations.forEach((reg) => {
+      console.log(`>>>> REGs ${util.inspect(reg)}`);
     const device = _.find(data.devices, dev => dev.deviceId === reg.deviceId);
+    console.log(`>>>> device ${util.inspect(device)}`);
     tokens.push(device.pushToken);
   });
 
@@ -139,10 +141,10 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
   }
 });
 
-// router.use((err, req, res, next) => {
-//   logger.error(err.status);
-//   console.log("!!!" + err.status);
-//   res.status(err.status || 500).json(err);
-// });
+router.use((err, req, res, next) => {
+  logger.error(err.status);
+  console.log("!!!" + err.status);
+  res.status(err.status || 500).json(err);
+});
 
 module.exports = router;
