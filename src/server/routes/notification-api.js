@@ -9,6 +9,8 @@ const config = require('config');
 const apn = require('apn');
 const validate = require('express-validation');
 const moment = require('moment');
+const bcrypt = require('bcryptjs');
+const util = require('util');
 
 const data = require('../common/mock-data');
 // const validateToken = require('../common/validateToken');
@@ -48,6 +50,7 @@ const options = {
 const apnProvider = new apn.Provider(options);
 
 const validateToken = (req, res, next) => {
+  console.log(">>>>> VT 1 >>>>>");
   const authorization = req.get('Authorization');
   if (authorization) {
     const token = authorization.split(' ')[1] || authorization.split(' ')[0];
