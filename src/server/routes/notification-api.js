@@ -8,6 +8,7 @@ const Joi = require('joi');
 const config = require('config');
 const apn = require('apn');
 const validate = require('express-validation');
+const moment = require('moment');
 
 const data = require('../common/mock-data');
 // const validateToken = require('../common/validateToken');
@@ -70,9 +71,9 @@ const validateToken = (req, res, next) => {
 //   res.status(result.status).json({msg: result.msg}).end();
 // });
 router.post('/update/:serialNumber', validateToken, validate(updateValidation), (req, res) => {
-  logger.debug('Update');
-  logger.debug(req.params);
-  logger.debug(req.body);
+  console.log('Update');
+  console.log(req.params);
+  console.log(req.body);
 
   const foundPass = _.find(data.passes, p => p.serialNumber === req.params.serialNumber);
   if (!foundPass) {
@@ -88,12 +89,20 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
       updated = true;
     }
   });
+
+  console.log(">>>>> CHK 1 >>>>>");
+
   if (!updated) {
+    console.log("!!! NOT UPDATED");
     res.status(200).end();
     return;
   }
 
+  console.log(">>>>> CHK 2 >>>>>");
+
   foundPass.lastUpdated = moment().unix();
+
+  console.log(">>>>> CHK 3 >>>>>");
 
   /* get all registrations for all devices associated with pass and send push */
   const registrations = _.filter(data.registrations,
@@ -103,9 +112,12 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
     const device = _.find(data.devices, dev => dev.deviceId === reg.deviceId);
     tokens.push(device.pushToken);
   });
+
+  console.log(">>>>> CHK 4 >>>>>");
+
   if (tokens.length) {
     const note = new apn.Notification({}); // always send an empty body
-
+    console.log(">>>>> CHK 5 >>>>>");
     tokens.forEach((t) => {
       console.log("+++++++ token ++++  " + t);
     });
@@ -119,12 +131,14 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
       else res.status(200).end();
     });
   } else {
+    console.log(">>>>> CHK 6 >>>>>");
     res.status(200).end();
   }
 });
 
 router.use((err, req, res, next) => {
   logger.error(err.status);
+  console.log("!!!" + err.status);
   res.status(err.status || 500).json(err);
 });
 
