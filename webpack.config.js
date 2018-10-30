@@ -35,7 +35,7 @@ module.exports = {
     port: config.CLIENT_PORT,
     open: true,
     proxy: {
-      '/api': 'https://qrcode-demo-test.herokuapp.com:' + config.API_PORT
+      '/api': `https://qrcode-demo-test.herokuapp.com:${process.env.PORT}`
     }
   },
   plugins: [

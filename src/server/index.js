@@ -32,7 +32,7 @@ function normalizePort(val) {
  * Get port from environment and store in Express.
  */
 const port = normalizePort(config.API_PORT || 3001);
-app.set('port', port);
+app.set('port', process.env.PORT);
 
 /**
  * Create HTTP server.
