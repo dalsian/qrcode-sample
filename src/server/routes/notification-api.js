@@ -108,6 +108,7 @@ router.post('/update/:serialNumber', validateToken, validate(updateValidation), 
   console.log(">>>>> CHK 3 >>>>>");
 
   /* get all registrations for all devices associated with pass and send push */
+  console.log(`>>>> REGs ${util.inspect(data)}`);
   const registrations = _.filter(data.registrations,
     reg => reg.serialNumber === req.params.serialNumber);
   const tokens = [];
