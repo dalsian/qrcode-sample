@@ -54,6 +54,7 @@ const getClientToken = async () => {
 const register = async (uid) => {
     console.log(">>>>> Registering " + uid);
     const clientToken = await getClientToken();
+    console.log(">>>>> client Token" + util.inspect(clientToken));
     const user = await reward_consumer.registerPreenrolled(uid, `${clientToken.token_type} ${clientToken.access_token}`);
     const userObj = JSON.parse(user);
     console.log(">>>> Preenrolled >>>> " + util.inspect(user));

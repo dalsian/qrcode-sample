@@ -47,6 +47,7 @@ const getClientToken = () => {
 };
 
 const registerPreenrolled = (deviceId, token) => {
+    console.log(">>>>> preenrolled");
     const postData = {
         "country": "US",
         "device_id": deviceId
