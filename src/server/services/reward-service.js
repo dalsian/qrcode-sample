@@ -47,7 +47,7 @@ const getClientToken = async () => {
             };
     } 
 
-    console.log("============ token >>> "+util.inherits(reward_client_token));
+    console.log("============ token >>> "+util.inspect(reward_client_token));
 
     return reward_client_token;
 };
@@ -60,9 +60,12 @@ const register = async (uid) => {
     console.log(">>>>> Registering " + uid);
     const clientToken = await getClientToken();
     console.log(">>>>> client Token" + util.inspect(clientToken));
-    const user = await reward_consumer.registerPreenrolled(uid, `${clientToken.token_type} ${clientToken.access_token}`);
+    const user = await reward_consumer.registerPreenrolled(uid, `${clientToken.token_type} ${clientToken.access_token}`)
+                                    .catch((err) => {
+                                        console.log(`!!! preenroll err >> ${err}`);
+                                    });
     const userObj = JSON.parse(user);
-    console.log(">>>> Preenrolled >>>> " + util.inspect(user));
+    console.log(">>>> Preenrolled >>>> " + util.inspect(userObj));
 
     const response = await db_manager.addDevice(uid, username, password);
     return response;
