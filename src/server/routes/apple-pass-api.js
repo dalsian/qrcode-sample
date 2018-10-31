@@ -113,9 +113,9 @@ router.post(`/devices/:deviceId/registrations/${passTypeIdentifier}/:serialNumbe
       deviceId: req.params.deviceId,
       pushToken: req.body.pushToken
     });
-
-    console.log(">>>>>>>>>>>>PUSH TOKEN >>>>" + req.body.pushToken);
   }
+
+  console.log(">>>>>>>>>>>>PUSH TOKEN >>>>" + req.body.pushToken);
 
   const registration = _.find(data.registrations, reg => reg.deviceId === req.params.deviceId
     && reg.serialNumber === req.params.serialNumber);
