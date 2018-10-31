@@ -98,6 +98,8 @@ router.post(`/devices/:deviceId/registrations/${passTypeIdentifier}/:serialNumbe
   logger.debug(req.body);
   logger.debug(req.params);
 
+  console.log("++++++++"+req.params.deviceId);
+
   /* find a pass for given serial number. fail if none is found */
   const pass = _.find(data.passes, p => p.serialNumber === req.params.serialNumber);
   if (!pass) {
