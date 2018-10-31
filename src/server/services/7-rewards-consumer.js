@@ -9,6 +9,8 @@
  * Module dependencies.
  */
 const httpUtil = require('../common/httpUtil');
+const querystring = require('querystring');
+const logger = require('../common/logger');
 
 
 /**
@@ -58,6 +60,7 @@ const registerPreenrolled = (deviceId, token) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(querystring.stringify((postData))),
             'Authorization': `${token}`
         }
     };
@@ -86,7 +89,8 @@ const authenticateUserByPassword = (username, password) => {
         path: '/auth/token', //todo rf
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Length': Buffer.byteLength(querystring.stringify((postData)))
         }
     };
 

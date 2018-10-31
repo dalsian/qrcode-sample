@@ -12,6 +12,7 @@ var util = require('util');
 var moment = require('moment');
 var reward_consumer = require('../services/7-rewards-consumer');
 var db_manager = require('../services/db-manager');
+const logger = require('../common/logger');
 
 //TODO this should be either be dynamic or eliminated in future.
 const username = "dev@t-3.com";
