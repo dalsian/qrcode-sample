@@ -38,12 +38,11 @@ const getClientToken = () => {
     };
     const options = {
         hostname: url,
-        port: 443,
         path: '/auth/token',
         method: 'POST'
     };
 
-    return httpUtil.callHttp(options, postData);
+    return httpUtil.callHttps(options, postData);
 };
 
 const registerPreenrolled = (deviceId, token) => {
@@ -62,7 +61,7 @@ const registerPreenrolled = (deviceId, token) => {
         }
     };
 
-    return httpUtil.callHttp(options, postData);
+    return httpUtil.callHttps(options, postData);
 }
 
 /**
@@ -87,7 +86,7 @@ const authenticateUserByPassword = (username, password) => {
         method: 'POST'
     };
 
-    return httpUtil.callHttp(options, postData);
+    return httpUtil.callHttps(options, postData);
 };
 
 /**
@@ -105,7 +104,7 @@ const getUserRewards = (token) => {
         }
     };
     
-    return httpUtil.callHttp(options);
+    return httpUtil.callHttps(options);
 };
 
 module.exports = {

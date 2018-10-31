@@ -19,6 +19,12 @@ const callHttps = (options, postData = {}) => {
             // console.log(`+++${util.inspect(options,{showHidden:false,depth:null})}`);
         }
 
+        /**
+         * !!!!! WARNING !!!!!!!
+         * TEMPORARY. DO NOT USE THIS IN PRODUCTION ENVIRONMENT.
+         */
+        process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
         const req = https.request(options, (res) => {
             console.log(`STATUS: ${res.statusCode}`);
             console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
