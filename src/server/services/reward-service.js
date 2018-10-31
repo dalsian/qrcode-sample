@@ -38,8 +38,9 @@ const getClientToken = async () => {
             console.log("============ token >>> chk2 ");
             const clientToken = await reward_consumer.getClientToken()
                                                     .catch((err) => {console.log(`!!! Client token err ${err}`)});
+            console.log(`------------token >>> ` + clientToken);
             const token = JSON.parse(clientToken);
-            console.log("============ token >>> chk3 ");
+            console.log("============ token >>> chk3 " + token);
             reward_client_token = {
                 access_token: token.access_token,
                 token_expire: (moment().add(token.expires_in, 's')),
