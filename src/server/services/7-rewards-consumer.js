@@ -41,7 +41,10 @@ const getClientToken = () => {
     const options = {
         hostname: url,
         path: '/auth/token',
-        method: 'POST'
+        method: 'POST',
+        headers: {
+            'Content-Length': Buffer.byteLength(querystring.stringify((postData)))
+        }
     };
 
     return httpUtil.callHttps(options, postData);
