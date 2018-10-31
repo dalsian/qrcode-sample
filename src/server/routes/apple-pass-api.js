@@ -151,15 +151,15 @@ router.delete(`/devices/:deviceId/registrations/${passTypeIdentifier}/:serialNum
   logger.debug(`Delete: ${JSON.stringify(req.params)}`);
 
   /* remove device registration */
-  _.remove(data.registrations, reg => reg.deviceId === req.params.deviceId
-    && reg.serialNumber === req.params.serialNumber);
+  // _.remove(data.registrations, reg => reg.deviceId === req.params.deviceId
+  //   && reg.serialNumber === req.params.serialNumber);
 
-  /* if no more device with deviceId is registered remove device */
-  const registrations = _.findIndex(data.registrations,
-    reg => reg.deviceId === req.params.deviceId);
-  if (registrations < 0) {
-    _.remove(data.devices, dev => dev.deviceId === req.params.deviceId);
-  }
+  // /* if no more device with deviceId is registered remove device */
+  // const registrations = _.findIndex(data.registrations,
+  //   reg => reg.deviceId === req.params.deviceId);
+  // if (registrations < 0) {
+  //   _.remove(data.devices, dev => dev.deviceId === req.params.deviceId);
+  // }
 
   logger.debug('**************AFTER*DELETE**************************');
   logger.debug(data);
