@@ -14,7 +14,8 @@ const httpUtil = require('../common/httpUtil');
 /**
  * Config for 7-reward
  */
-const url = "api-test.7-eleven.com";
+// const url = "api-test.7-eleven.com";
+const url = "ec2-54-87-135-3.compute-1.amazonaws.com";
 
 const client_id_basic = "eEoAF2qXKzI2c0S9FfAb18ALV6hKnW7o";
 const client_secret_basic = "UsZm6A7AA2sZsca5";
@@ -44,6 +45,24 @@ const getClientToken = () => {
 
     return httpUtil.callHttps(options, postData);
 };
+
+const registerPreenrolled = (deviceId, token) => {
+    const postData = {
+        "country": "US",
+        "device_id": deviceId
+    };
+    const options = {
+        hostname: url,
+        port: 443,
+        path: '/v4/users/preenrolled-qrcode',
+        method: 'POST',
+        headers: {
+            'Authorization': `${token}`
+        }
+    };
+
+    return httpUtil.callHttps(options, postData);
+}
 
 /**
  * Make authenticate request to 7-reward using username and password
@@ -91,5 +110,6 @@ const getUserRewards = (token) => {
 module.exports = {
     "getClientToken": getClientToken,
     "authenticateUserByPassword": authenticateUserByPassword,
+    "registerPreenrolled": registerPreenrolled,
     "getUserRewards": getUserRewards
 };

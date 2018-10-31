@@ -47,12 +47,17 @@ const getClientToken = async () => {
     return reward_client_token;
 };
 
-const register = async (uid) => {
-    //TODO generate unique username and password to each device.
-    //TODO register user to 7-reward api.
+//TODO register user to 7-reward api.
     //  (1) Look for client token in memory, if expired, 
     //      call client authentication from 7-reward api.
     //  (2) Register new account using client token
+const register = async (uid) => {
+    console.log(">>>>> Registering " + uid);
+    const clientToken = await getClientToken();
+    const user = await reward_consumer.registerPreenrolled(uid, clientToken);
+    const userObj = JSON.parse(user);
+    console.log(">>>> Preenrolled >>>> " + util.inspect(user));
+
     const response = await db_manager.addDevice(uid, username, password);
     return response;
 };
