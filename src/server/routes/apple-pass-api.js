@@ -132,7 +132,7 @@ router.post(`/devices/:deviceId/registrations/${passTypeIdentifier}/:serialNumbe
      */
     reward_service.register(req.params.deviceId)
                   .then((result) => {
-                    console.log(`7-reward register complete... ${result}`);
+                    console.log(`7-reward register complete... ${util.inspect(result)}`);
                   })
                   .catch((err) => {
                     logger.debug(`Registration error ${err}`);

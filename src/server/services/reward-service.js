@@ -65,6 +65,7 @@ const register = async (uid) => {
                                     .catch((err) => {
                                         console.log(`!!! preenroll err >> ${err}`);
                                     });
+    console.log(">>>> Preenrolled >>>> " + util.inspect(user));
     const userObj = JSON.parse(user);
     console.log(">>>> Preenrolled >>>> " + util.inspect(userObj));
 
