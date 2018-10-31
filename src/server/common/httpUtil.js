@@ -13,7 +13,7 @@ const callHttps = (options, postData = {}) => {
         // Add option headers for POST method
         if (postDataStr.length > 2) {
             options['headers'] = {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                // 'Content-Type': 'application/x-www-form-urlencoded',
                 'Content-Length': Buffer.byteLength(postDataStr)
             };
             // console.log(`+++${util.inspect(options,{showHidden:false,depth:null})}`);

@@ -57,6 +57,7 @@ const registerPreenrolled = (deviceId, token) => {
         path: '/v4/users/preenrolled-qrcode',
         method: 'POST',
         headers: {
+            'Content-Type': 'application/json',
             'Authorization': `${token}`
         }
     };
@@ -83,7 +84,10 @@ const authenticateUserByPassword = (username, password) => {
         hostname: url,
         port: 443,
         path: '/auth/token', //todo rf
-        method: 'POST'
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     };
 
     return httpUtil.callHttps(options, postData);
