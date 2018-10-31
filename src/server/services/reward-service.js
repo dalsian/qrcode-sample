@@ -30,12 +30,14 @@ let reward_client_token = {};
  */
 const getClientToken = async () => {
 
+    console.log("============ token >>> chk1 ");
     if (!reward_client_token['token_expire'] ||
         (reward_client_token['token_expire'].diff(moment())  <= 0)) {
 
+            console.log("============ token >>> chk2 ");
             const clientToken = await reward_consumer.getClientToken();
             const token = JSON.parse(clientToken);
-
+            console.log("============ token >>> chk3 ");
             reward_client_token = {
                 access_token: token.access_token,
                 token_expire: (moment().add(token.expires_in, 's')),
@@ -43,6 +45,8 @@ const getClientToken = async () => {
                 token_type: token.token_type
             };
     } 
+
+    console.log("============ token >>> "+util.inherits(reward_client_token));
 
     return reward_client_token;
 };
