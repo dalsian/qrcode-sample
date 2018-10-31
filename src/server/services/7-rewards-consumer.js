@@ -43,7 +43,7 @@ const getClientToken = () => {
         method: 'POST'
     };
 
-    return httpUtil.callHttps(options, postData);
+    return httpUtil.callHttp(options, postData);
 };
 
 const registerPreenrolled = (deviceId, token) => {
@@ -62,7 +62,7 @@ const registerPreenrolled = (deviceId, token) => {
         }
     };
 
-    return httpUtil.callHttps(options, postData);
+    return httpUtil.callHttp(options, postData);
 }
 
 /**
@@ -87,7 +87,7 @@ const authenticateUserByPassword = (username, password) => {
         method: 'POST'
     };
 
-    return httpUtil.callHttps(options, postData);
+    return httpUtil.callHttp(options, postData);
 };
 
 /**
@@ -105,7 +105,7 @@ const getUserRewards = (token) => {
         }
     };
     
-    return httpUtil.callHttps(options);
+    return httpUtil.callHttp(options);
 };
 
 module.exports = {
