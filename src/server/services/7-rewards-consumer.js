@@ -69,7 +69,7 @@ const registerPreenrolled = (deviceId, token) => {
             'Authorization': `${token}`
         }
     };
-    console.log(`************* ${postData}`);
+    console.log(`************* ${util.inspect(postData)}`);
     return httpUtil.callHttps(options, postData);
 }
 
