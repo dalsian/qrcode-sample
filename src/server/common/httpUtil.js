@@ -8,7 +8,7 @@ const callHttps = (options, postData = {}) => {
     
     return new Promise((resolve, reject) => {
 
-        // const postDataStr = querystring.stringify(postData);
+        const postDataStr = querystring.stringify(postData);
 
         // Add option headers for POST method
         // if (postDataStr.length > 2) {
@@ -45,7 +45,7 @@ const callHttps = (options, postData = {}) => {
         });
     
         // write data to request body
-        req.write(querystring.stringify(postData));
+        req.write(postDataStr);
         req.end();
     });
 };
