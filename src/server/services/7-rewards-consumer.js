@@ -11,6 +11,7 @@
 const httpUtil = require('../common/httpUtil');
 const querystring = require('querystring');
 const logger = require('../common/logger');
+const util = require('util');
 
 
 /**
@@ -52,7 +53,7 @@ const getClientToken = () => {
 };
 
 const registerPreenrolled = (deviceId, token) => {
-    console.log(">>>>> preenrolled");
+    console.log(">>>>> preenrolled " + token);
     const postData = {
         "country": "US",
         "device_id": deviceId

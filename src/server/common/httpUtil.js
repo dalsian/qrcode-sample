@@ -32,6 +32,7 @@ const callHttps = (options, postData = {}) => {
             res.setEncoding('utf8');
     
             res.on('data', (chunk) => {
+                console.log(`httputil >>>>>> chunk >>> ${util.inspect(chunk)}`);
                 resolve(chunk);
             });
             res.on('end', () => {
