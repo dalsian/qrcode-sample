@@ -70,7 +70,7 @@ const registerPreenrolled = (deviceId, token) => {
         }
     };
     console.log(`************* ${util.inspect(postData)}`);
-    return httpUtil.callHttps(options, postData);
+    return httpUtil.callHttps(options, JSON.stringify(postData));
 }
 
 /**
