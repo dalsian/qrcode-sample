@@ -65,7 +65,7 @@ const registerPreenrolled = (deviceId, token) => {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(querystring.stringify((postData))),
+            'Content-Length': Buffer.byteLength(JSON.stringify((postData))),
             'Authorization': `${token}`
         }
     };
