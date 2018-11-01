@@ -4,7 +4,6 @@
  * like 7-reward-consumer, our DB, ...etc.
  */
 
-
 /**
  * Module dependencies.
  */
@@ -31,16 +30,14 @@ let reward_client_token = {};
  */
 const getClientToken = async () => {
 
-    console.log("============ token >>> chk1 ");
     if (!reward_client_token['token_expire'] ||
         (reward_client_token['token_expire'].diff(moment())  <= 0)) {
 
-            console.log("============ token >>> chk2 ");
             const clientToken = await reward_consumer.getClientToken()
                                                     .catch((err) => {console.log(`!!! Client token err ${err}`)});
-            console.log(`------------token >>> ` + util.inspect(clientToken));
+            
             const token = JSON.parse(clientToken);
-            console.log("============ token >>> chk3 " + util.inspect(token));
+
             reward_client_token = {
                 access_token: token.access_token,
                 token_expire: (moment().add(token.expires_in, 's')),
@@ -54,21 +51,23 @@ const getClientToken = async () => {
     return reward_client_token;
 };
 
-//TODO register user to 7-reward api.
+//Register user to 7-reward api.
     //  (1) Look for client token in memory, if expired, 
     //      call client authentication from 7-reward api.
     //  (2) Register new account using client token
 const register = async (uid) => {
+
     console.log(">>>>> Registering " + uid);
+
     const clientToken = await getClientToken();
-    console.log(">>>>> client Token" + util.inspect(clientToken));
     const user = await reward_consumer.registerPreenrolled(uid, `${clientToken.token_type} ${clientToken.access_token}`)
-                                    .catch((err) => {
-                                        console.log(`!!! preenroll err >> ${err}`);
-                                    });
-    console.log(">>>> Preenrolled >>>> " + util.inspect(user));
+                                        .catch((err) => {
+                                            console.log(`!!! preenroll err >> ${err}`);
+                                        });
     const userObj = JSON.parse(user);
     console.log(">>>> Preenrolled >>>> " + util.inspect(userObj));
+
+    //TODO extract barcode. rewardpoints? update pass.
 
     const response = await db_manager.addDevice(uid, username, password);
     return response;

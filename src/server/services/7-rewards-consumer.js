@@ -33,7 +33,6 @@ const client_secret_user = "MIi6anADaucYMg8xIbAPXRPG3Sgt5mQRcko47qNQSll2tl" +
  * 7-reward user registrations.
  */
 const getClientToken = () => {
-    console.log(">>>>>> Client token");
     const postData = {
         "client_id": client_id_basic,
         "client_secret": client_secret_basic,
@@ -53,7 +52,6 @@ const getClientToken = () => {
 };
 
 const registerPreenrolled = (deviceId, token) => {
-    console.log(">>>>> preenrolled " + token);
     const postData = {
         "country": "US",
         "device_id": deviceId
@@ -69,9 +67,8 @@ const registerPreenrolled = (deviceId, token) => {
             'Authorization': `${token}`
         }
     };
-    console.log(`************* ${util.inspect(postData)}`);
     return httpUtil.callHttps(options, JSON.stringify(postData));
-}
+};
 
 /**
  * Make authenticate request to 7-reward using username and password
@@ -80,7 +77,6 @@ const registerPreenrolled = (deviceId, token) => {
  * @param {*} password 
  */
 const authenticateUserByPassword = (username, password) => {
-    console.log(">>>>>> Authenticate User");
     const postData = {
         "client_id": client_id_user,
         "client_secret": client_secret_user,
