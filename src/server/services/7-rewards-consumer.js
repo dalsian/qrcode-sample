@@ -49,7 +49,7 @@ const getClientToken = () => {
         }
     };
 
-    return httpUtil.callHttps(options, postData);
+    return httpUtil.callHttps(options, querystring.stringify(postData));
 };
 
 const registerPreenrolled = (deviceId, token) => {
@@ -99,7 +99,7 @@ const authenticateUserByPassword = (username, password) => {
         }
     };
 
-    return httpUtil.callHttps(options, postData);
+    return httpUtil.callHttps(options, querystring.stringify(postData));
 };
 
 /**
