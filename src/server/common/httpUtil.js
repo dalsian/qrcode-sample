@@ -36,6 +36,5 @@ const callHttps = (options, postData = {}) => {
 };
 
 module.exports = {
-    "callHttp": callHttp,
     "callHttps": callHttps
 };
