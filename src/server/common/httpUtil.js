@@ -3,7 +3,7 @@ const querystring = require('querystring');
 const util = require('util');
 const logger = require('../common/logger');
 
-const callHttps = (options, postData) => {
+const callHttps = (options, postData = {}) => {
     
     return new Promise((resolve, reject) => {
 
@@ -30,11 +30,7 @@ const callHttps = (options, postData) => {
         });
     
         // write data to request body
-        if (postData) {
-            req.write(postData);
-        } else {
-            req.write();
-        }
+        req.write(postData);
         req.end();
     });
 };
