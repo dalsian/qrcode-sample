@@ -8,7 +8,7 @@ import AddToWalletBtn from '../imgs/add-to-wallet-button.png';
 
 
     addToWallet(){
-      window.location.href="https://qrcode-reward-test.herokuapp.com/v1/pass?id=c653357d-d30a-42b7-856e-abd625fc1af2";
+      window.location.href="https://qrcode-demo-test.herokuapp.com/v1/pass?id=c653357d-d30a-42b7-856e-abd625fc1af2";
     }
     render() {
       const cssText1={
@@ -29,7 +29,7 @@ import AddToWalletBtn from '../imgs/add-to-wallet-button.png';
 
           <div className="se-module se-module-register-hdr">
             <div className="wallet-button">
-              <a href="https://qrcode-reward-test.herokuapp.com/v1/pass?id=c653357d-d30a-42b7-856e-abd625fc1af2"  id="wallet-href"><img src={AddToWalletBtn}/></a>
+              <a href="https://qrcode-demo-test.herokuapp.com/v1/pass?id=c653357d-d30a-42b7-856e-abd625fc1af2"  id="wallet-href"><img src={AddToWalletBtn}/></a>
             </div>
           </div>
 
