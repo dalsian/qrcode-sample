@@ -63,7 +63,6 @@ const updatePass = async (_serialNumber, _body) => {
 
 const updateAllPass = async (_body) => {
     logger.debug('>>>>>>Update All');
-    logger.debug(_serialNumber);
     logger.debug(_body);
 
     let updated = false;
