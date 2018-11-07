@@ -5,6 +5,7 @@ const express = require('express');
 
 const logger = require('../common/logger');
 const router = express.Router();
+
 /**
  * Log from device.
  */

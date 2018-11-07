@@ -1,0 +1,27 @@
+@media only screen 
+and (min-width : 768px) {
+    
+    .header-border {
+        height: 60px;
+        border-bottom: 8px solid #467d61;
+    }
+    
+    .navbar {
+        height: 48px;
+    }
+    
+    .navbar-brand{
+        position: relative;
+        top: -22px;
+    }
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #3ba944;
+    font: 14px/18px "Heebo-Medium",Helvetica,Arial,sans-serif;
+    font-weight: bold;
+}
+
+.navbar-light .navbar-toggler {
+    color: #3ba944;
+}

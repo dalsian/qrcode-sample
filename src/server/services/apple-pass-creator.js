@@ -99,11 +99,6 @@ function handlePass(res, itemId, data) {
   logger.debug(`New length: ${data.passes.length}`);
   logger.debug('****************************************************');
 
-  console.log('**************CREATED*PASS**************************');
-  console.log(`New serial: ${serialNumber}`);
-  console.log(`New length: ${data.passes.length}`);
-  console.log('****************************************************');
-
   /* Send back to user */
   res.status(200);
   return pass.render(res).catch((e) => {

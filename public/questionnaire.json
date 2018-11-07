@@ -1,0 +1,22 @@
+{
+  "data":[
+    {
+      "qid":1,
+      "type":"options",
+      "question":"1.How many times you visited 7-11 stores?",
+      "options":[
+         "1","2","3"
+      ]
+    },
+    {
+      "qid":2,
+      "type":"editText",
+      "question":"2.What's your phone number?"
+    },
+    {
+      "qid":3,
+      "type":"editText",
+      "question":"3.What's your email?"
+    }
+  ]
+}

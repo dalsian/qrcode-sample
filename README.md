@@ -23,7 +23,7 @@ yarn dev
 
 # Build for production
 yarn build
-
+yarn
 # Start production server
 yarn start
 ```
