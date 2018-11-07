@@ -61,4 +61,41 @@ const updatePass = async (_serialNumber, _body) => {
     }
 };
 
-module.exports = {'updatePass' : updatePass};
+const updateAllPass = async (_body) => {
+    logger.debug('>>>>>>Update All');
+    logger.debug(_serialNumber);
+    logger.debug(_body);
+
+    let updated = false;
+    _.forEach(data.passes, (foundPass) => {
+        _.forEach(_body.update, (item) => {
+            if (foundPass.pass[item.field]) {
+                if (item.key) foundPass.pass[item.field].setValue(item.key, item.value);
+                else foundPass.pass[item.field](item.value);
+                updated = true;
+                foundPass.lastUpdated = moment().unix();
+            }
+        })
+    });
+    if (!updated) {
+        return {status: 200, msg: 'Not updated'};
+    }
+
+    /* get all registrations for all devices associated with pass and send push */
+    const registrations = data.registrations;
+    const tokens = [];
+    registrations.forEach((reg) => {
+        const device = _.find(data.devices, dev => dev.deviceId === reg.deviceId);
+        tokens.push(device.pushToken);
+    });
+    if (tokens.length) {
+        const note = new apn.Notification({}); // always send an empty body
+        console.log('Sending apn');
+        return apnProvider.send(note, tokens);
+    } else {
+        return {status: 200, msg: "OK"};
+    }
+};
+
+module.exports = {'updatePass' : updatePass, 'updateAllPass' : updateAllPass};
+

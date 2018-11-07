@@ -27,4 +27,15 @@ router.post('/update/:serialNumber', validateToken, validate(validationPattern.a
   });
 });
 
+router.post('/update_all', validateToken, validate(validationPattern.appleNotificationValidation), (req, res) => {
+  const update = apple_notification.updateAllPass(req.body);
+  update.then((result) => {
+    console.log("Result>>>"+result);
+    res.status(result.status).json({msg: result.msg});
+  }).catch((err) => {
+    res.status(500).json({errMsg: err});
+  });
+});
+
+
 module.exports = router;
